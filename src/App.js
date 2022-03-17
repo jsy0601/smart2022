@@ -1,42 +1,63 @@
-import { faker } from '@faker-js/faker';
-import dog from './dog.jpg';
+import faker from '@faker-js/faker';  //영문 버전의 fakerjs
+import faker_ko from '@faker-js/faker/locale/ko';  //한글 버전의 fakerjs
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import './App.css';
 
-//JSX
-const testData = [
-  {
-    text: "대통령은 헌법과 법률이 정하는 바에 의하여 공무원을 임면한다.",
-    imgUrl: "https://file.thisisgame.com/upload/tboard/user/2013/06/25/20130625165342_3182.jpg"
-  },{
-    text: "국회는 법률에 저촉되지 아니하는 범위안에서 의사와 내부규율에 관한 규칙을 제정할 수 있다.",
-    imgUrl: "https://file.thisisgame.com/upload/tboard/user/2013/06/25/20130625165343_9591.jpg"
-  }, {
-    text: "의원을 제명하려면 국회재적의원 3분의 2 이상의 찬성이 있어야 한다.",
-    imgUrl: "https://file.thisisgame.com/upload/tboard/user/2013/06/25/20130625165332_3141.jpeg"
-  }
-]
 
 function App() {
-  const h1Element = <h1>H1 제목 태그 입니다.</h1>;
-  const imgElemnet = <img src={dog} className="App-logo" alt="logo" />;
+  const userDatas = [];
+
+  while(userDatas.length < 5){
+    userDatas.push({
+      avatar: faker.image.avatar(),
+      name: `${faker_ko.name.lastName()}${faker_ko.name.firstName()}`,
+      email: faker.internet.email(),
+      jobTitle: faker.name.jobTitle(),
+      phoneNo: faker.phone.phoneNumber()
+    })
+  }
+
+  const userCards = userDatas.map((userData, idx) => {
+    return <Card sx={{ maxWidth: 345 }}>
+    <CardMedia
+      component="img"
+      height="345"
+      image={ userData.avatar }
+      alt="green iguana"
+    />
+    <CardContent>
+      <Typography gutterBottom variant="h5" component="div">
+        <h4>{ userData.jobTitle }</h4>
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+        <h5>{ userData.name }</h5>
+        {userData.email} <br />
+        {userData.phoneNo}
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button size="small">Share</Button>
+      <Button size="small">Learn More</Button>
+    </CardActions>
+  </Card>
+    // <div key={idx}>
+    //   <h4>{ userData.jobTitle }</h4>
+    //   <img src={ userData.avatar } alt="사용자 프로필용 아바타"></img>
+    //   <h5>{ userData.name }</h5>
+    //   {userData.email} <br />
+    //   {userData.phoneNo}
+    // </div>
+  })
+
+  console.log(userDatas)
   return (
     <div className="App">
-      <header className="App-header">
-        { h1Element }
-        { imgElemnet }
-        <p>
-          히히 <code>src/App.js</code> and save to reload.
-        </p>
-        <ul>
-          {testData.map((contents)=>{
-            return <div>
-              <img src={faker.image.avatar()} alt="강아지 사진" />
-              {contents.text}
-              <img src={faker.image.cats()} alt="강아지 사진" />
-              </div>
-          })}
-        </ul>
-      </header>
+        {userCards}
     </div>
   );
 }
