@@ -5,10 +5,9 @@ import Container from '@mui/material/Container';
 import UserCard from './components/UserCard';
 import { ThemeProvider, useTheme, createTheme } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
-import { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
   const userDatas = [];
@@ -40,7 +39,7 @@ function App() {
 
   const userCards = userDatas.map((userData, idx) => {
     return <Grid item xs={2} sm={4} md={4} key={idx}>
-       <UserCard userData={userData} />;
+       <UserCard userData={userData} />
       </Grid>
   })
 
