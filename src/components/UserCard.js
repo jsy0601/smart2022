@@ -28,10 +28,10 @@ function UserCard(props) {
             alt="green iguana"
             />
             <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography gutterBottom variant="h5" component="div"  color={fontColor}>
                 <h4>{ userData.jobTitle }</h4>
             </Typography>
-            <Typography variant="body2" color={fontColor}>
+            <Typography variant="body2">
                 <h5>{ userData.name }</h5>
                 {userData.email} <br />
                 {userData.phoneNo}

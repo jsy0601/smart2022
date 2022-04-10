@@ -23,10 +23,11 @@ function App() {
 
   const selectHandleChange = (event) => {
     const cityName = event.target.value;
-    const findCityLatLon = cityLatLon.find((element) => {
-      return element.name === cityName;
-    });
-    setSelectedCityData( findCityLatLon );
+    const findCityLatLon = cityLatLon.find(data => data.name === cityName)
+    // const findCityLatLon = cityLatLon.find((element) => {
+    //   return element.name === cityName;
+    // });
+    setSelectedCityData(findCityLatLon);
   };
 
   useEffect(() => {
@@ -64,7 +65,7 @@ function App() {
       }}>
         <Container maxWidth="lg">
           <FormControl>
-            <InputLabel id="selected-city-label">Age</InputLabel>
+            <InputLabel id="selected-city-label">도시</InputLabel>
             <Select
               labelId="selected-city-label"
               id="selected-city"
