@@ -45,7 +45,7 @@ function App() {
         <Switch
           checked={useDarkMode}
           onChange={handleChange}
-          color="warning"
+          color="secondary"
           inputProps={{'aria-label':'controlled'}}
         />
           <UserCardList userDatas={userDatas}/>
