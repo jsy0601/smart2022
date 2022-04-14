@@ -24,9 +24,11 @@ function App() {
   const selectHandleChange = (event) => {
     const cityName = event.target.value;
     const findCityLatLon = cityLatLon.find(data => data.name === cityName)
+    
     // const findCityLatLon = cityLatLon.find((element) => {
     //   return element.name === cityName;
     // });
+
     setSelectedCityData(findCityLatLon);
   };
 
