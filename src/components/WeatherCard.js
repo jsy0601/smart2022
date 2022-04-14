@@ -6,17 +6,18 @@ import axios from 'axios';
 import { InputLabel,MenuItem,FormControl,Select } from '@mui/material';
 
 function WeatherCard(props) {
+    const { id } = props;
+    const defaultCityName = localStorage.getItem(id+'_city') || "안양";
     const [weatherData, setWeatherData] = useState(null);
     const [apiError, setApiError] = useState(null);
-    const [selectedCityData,setSelectedCityData] = useState({ name: "안양",lat: 37.3943,lon: 126.9568 }); 
+    const [selectedCityData,setSelectedCityData] = useState(cityLatLon.find(data=> data.name === defaultCityName));
+    // const [selectedCityData,setSelectedCityData] = useState({ name: "안양",lat: 37.3943,lon: 126.9568 }); 
 
     const selectHandleChange = (event) => {
         const cityName = event.target.value;
-        const findCityLatLon = cityLatLon.find(data => data.name === cityName)
-        // const findCityLatLon = cityLatLon.find((element) => {
-        //   return element.name === cityName;
-        // });
+        const findCityLatLon = cityLatLon.find(data => data.name === cityName);
         setSelectedCityData(findCityLatLon);
+        localStorage.setItem(id+'_city', findCityLatLon.name)
     };
 
     useEffect(() => {
@@ -28,12 +29,12 @@ function WeatherCard(props) {
         if(Date.now() - localStorage.getItem(cityGetDate) / 1000 / 60 > 60){
             axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${selectedCityData.lat}&lon=${selectedCityData.lon}&lang=kr&units=metric&appid=b1cd9e3d5006fb41508c9ae443a66edf`)
             .then(result => {
-            setWeatherData(result.data);
-            localStorage.setItem(cityName, JSON.stringify(result.data));
-            localStorage.setItem(cityGetDate, Date.now());
+                setWeatherData(result.data);
+                    localStorage.setItem(cityName, JSON.stringify(result.data));
+                    localStorage.setItem(cityGetDate, Date.now());
             })  
             .catch(error => {
-            setApiError(error);
+                setApiError(error);
             })
         }else{
             setWeatherData(JSON.parse(localStorage.getItem(cityName)));
