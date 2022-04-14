@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import { weather_mapping_data } from "../dataset/WeatherData";
 import { Grid } from '@mui/material';
 
